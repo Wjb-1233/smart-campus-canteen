@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.campus.canteen.mapper.DishMapper">
+
+  <select id="search" resultType="com.campus.canteen.entity.Dish">
+    SELECT DISTINCT d.* FROM t_dish d
+    <if test="tagCodes != null and tagCodes.size() &gt; 0">
+      INNER JOIN t_dish_tag dt ON d.id = dt.dish_id
+      INNER JOIN t_nutrition_tag t ON dt.tag_id = t.id
+    </if>
+    WHERE d.status = 1
+    <if test="keyword != null and keyword != ''">
+      AND d.name LIKE CONCAT('%', #{keyword}, '%')
+    </if>
+    <if test="mealPeriod != null and mealPeriod != ''">
+      AND d.meal_period = #{mealPeriod}
+    </if>
+    <if test="tagCodes != null and tagCodes.size() &gt; 0">
+      AND t.code IN
+      <foreach collection="tagCodes" item="c" open="(" separator="," close=")">
+        #{c}
+      </foreach>
+      GROUP BY d.id
+      HAVING COUNT(DISTINCT t.code) = #{tagCount}
+    </if>
+    ORDER BY d.heat_score DESC, d.id ASC
+  </select>
+
+  <select id="findSubstitute" resultType="com.campus.canteen.entity.Dish">
+    SELECT d.* FROM t_dish d
+    INNER JOIN t_dish_tag dt ON d.id = dt.dish_id
+    INNER JOIN t_nutrition_tag t ON dt.tag_id = t.id
+    WHERE d.status = 1 AND d.stock &gt; 0 AND d.id != #{excludeId}
+      AND d.meal_period = #{mealPeriod}
+      AND t.code IN (
+        SELECT t2.code FROM t_dish_tag dt2
+        INNER JOIN t_nutrition_tag t2 ON dt2.tag_id = t2.id
+        WHERE dt2.dish_id = #{excludeId}
+      )
+    GROUP BY d.id
+    ORDER BY COUNT(*) DESC, d.stock DESC
+    LIMIT 1
+  </select>
+</mapper>

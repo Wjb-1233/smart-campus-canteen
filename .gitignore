@@ -1,0 +1,16 @@
+node_modules/
+dist/
+target/
+.idea/
+*.iml
+.vscode/
+.DS_Store
+*.log
+.env
+.env.*
+docker/mysql-data/
+docker/redis-data/
+frontend/dist/
+backend/target/
+*.class
+.plan-attestation

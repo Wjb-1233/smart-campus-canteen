@@ -1,0 +1,12 @@
+﻿IDEA 启动说明
+=============
+1. 关闭并重新打开 backend 工程（让运行配置生效）
+2. 右上角运行配置选择：CanteenJar
+3. 点击绿色运行按钮
+4. 控制台出现 Started CanteenApplication 即成功
+5. 接口地址：http://localhost:8080/api
+
+说明：
+- 已配置 JRE = D:\jdk-17
+- 启动前会自动执行 FreePort8080 释放 8080 端口
+- 如仍失败：File -> Project Structure -> Project SDK 选 17
