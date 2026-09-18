@@ -1,0 +1,42 @@
+:root {
+  --campus-blue: #1a5f9e;
+  --campus-blue-light: #2d7cc8;
+  --campus-sky: #e8f3fc;
+  --campus-ink: #1c2b3a;
+  --campus-muted: #5b6b7c;
+  --campus-line: #d7e3ef;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--campus-ink);
+  background: linear-gradient(180deg, #f3f8fc 0%, #eef4f9 100%);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: transparent; }
+a { color: inherit; text-decoration: none; }
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hero-band {
+  background: linear-gradient(135deg, #1a5f9e 0%, #3a8fd0 55%, #7eb6e8 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(26, 95, 158, 0.2);
+}
+
+.card-soft {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--campus-line);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.tag-chip {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
